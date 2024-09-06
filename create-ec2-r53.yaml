@@ -9,7 +9,7 @@
    - mysql
    - backend
    - frontend
-  zone: "devteck.xyz"
+   zone: "devteck.xyz"
 
   tasks:
   - name: Install boto3 and botocore with pip3 module
