@@ -11,11 +11,11 @@
    - frontend
 
   tasks:
-  - name: create ec2-instances
+  - name: create ec2-instance
     amazon.aws.ec2_instance:
      name: "{{ item }}"
      vpc_subnet_id: "{{ subnet_id }}"
-     instance_type: t2.micro
+     instance_type: "t2.micro"
      security_group: "{{ sg_group }}"
      image_id: "{{ ami_id }}"
     loop: "{{ instances }}"
