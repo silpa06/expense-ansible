@@ -1,6 +1,6 @@
 - name: create ec2-instances
   hosts: local
-  connections: local
+  connection: local
   vars:
    subnet_id: "subnet-0b3e5e27d1a5902bd" 
    sg_group: "sg-011b2b086e67184b0"
