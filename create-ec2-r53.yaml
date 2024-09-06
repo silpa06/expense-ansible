@@ -58,6 +58,11 @@
     loop: "{{ ec2_instances.results }}"
     when: item.item == "frontend"
 
+  - name: terminate every running instances
+    amazon.aws.ec2_instance:
+    state: absent
+    filters:
+      instance-state-name: running
 
 
 
