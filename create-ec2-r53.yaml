@@ -13,13 +13,13 @@
   tasks:
   - name: create ec2-instances
     amazon.aws.ec2_instance:
-     name: {{ item }}
+     name: "{{ item }}"
      vpc_subnet_id: "{{ subnet_id }}"
      instance_type: t2.micro
      security_group: "{{ sg_group }}"
      image_id: "{{ ami_id }}"
-     loop: "{{ instances }}"
-     register: ec2-instances
+    loop: "{{ instances }}"
+    register: ec2-instances
 
   - name: print the output
     ansible.builtin.debug:
