@@ -10,20 +10,20 @@
    - backend
    - frontend
 
-   tasks:
-    - name: create ec2-instances
-      amazon.aws.ec2_instance:
-       name: "{{ item }}"
-       vpc_subnet_id: "{{ subnet_id }}"
-       instance_type: t2.micro
-       security_group: "{{ sg_group }}"
-       image_id: "{{ ami_id }}"
-      loop: "{{ instances }}"
-      register: ec2-instances
+  tasks:
+  - name: create ec2-instances
+    amazon.aws.ec2_instance:
+     name: "{{ item }}"
+     vpc_subnet_id: "{{ subnet_id }}"
+     instance_type: t2.micro
+     security_group: "{{ sg_group }}"
+     image_id: "{{ ami_id }}"
+     loop: "{{ instances }}"
+     register: ec2-instances
 
-    - name: print the output
-      ansible.builtin.debug:
-       msg: "{{ ec2-instances }}"
+  - name: print the output
+    ansible.builtin.debug:
+     msg: "{{ ec2-instances }}"
 
 
 
