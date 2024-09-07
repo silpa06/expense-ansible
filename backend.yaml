@@ -1,0 +1,49 @@
+- name: backend configuration
+  hosts: backend
+  become: yes
+  tasks:
+  - name: disable the nodejs application
+    ansible.builtin.command: dnf module disable nodejs -y
+
+  - name: enable the nodejs:20 application
+    ansible.builtin.command: dnf module enable nodejs:20 -y
+
+  - name: install nodejs:20 app 
+    ansible.builtin.package:
+     name: nodejs
+     state: present
+  
+  - name: start nodejs app
+    ansible.builtin.service:
+     name: nodejs
+     state: started
+     enabled: yes
+
+  - name: add application user expense 
+    ansible.builtin.user:
+     name: expense
+
+  - name: set up app directory
+    ansible.builtin.file:
+    path: /app
+    state: directory
+
+  # - name: downloading the application code
+  #   ansible.builtin.get_url:
+  #    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
+  #    dest: /tmp/backend.zip
+
+  # - name: change to /app directory
+
+  - name: fetch and download the application code
+    ansible.builtin.fetch:
+     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
+     dest: /app
+    
+
+
+
+   
+
+
+
