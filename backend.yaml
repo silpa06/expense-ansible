@@ -10,14 +10,12 @@
 
   - name: install nodejs:20 app 
     ansible.builtin.package:
-     name: nodejs
+     name: "{{ item }}"
      state: present
+    loop:
+    - nodejs
+    - mysql
   
-  - name: start nodejs app
-    ansible.builtin.service:
-     name: nodejs
-     state: started
-     enabled: yes
 
   - name: add application user expense 
     ansible.builtin.user:
