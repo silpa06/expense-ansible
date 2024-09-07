@@ -6,10 +6,11 @@
    Mysql_login_host: "mysql.devteck.xyz"
   tasks:
   - name: install mysql dependencies
-    ansible.builtin.package:
+    ansible.builtin.pip:
      name: PyMySQL
      state: present
-     
+     executable: pip-3.9
+
   - name: mysql server installation
     ansible.builtin.package:
      name: mysql-server
