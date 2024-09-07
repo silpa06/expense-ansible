@@ -27,6 +27,7 @@
      login_user: root
      login_password: "{{ Mysql_root_password }}"
      login_host: "{{ Mysql_login_host }}"
+     ignore_errors: true 
     register: mysql_info 
 
   - name: print mysql mysql_info
