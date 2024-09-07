@@ -26,18 +26,22 @@
      path: /app
      state: directory
 
-  # - name: downloading the application code
-  #   ansible.builtin.get_url:
-  #    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
-  #    dest: /tmp/backend.zip
+  - name: downloading the application code
+    ansible.builtin.get_url:
+     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
+     dest: /tmp/backend.zip
 
-  # - name: change to /app directory
 
-  - name: fetch and download the application code
-    ansible.builtin.fetch:
-     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
-     dest: /app
+  - name: Extract the zip file into /app
+    ansible.builtin.unarchive:
+      src: /tmp/backend.zip
+      dest: /app
+      remote_src: yes
     
+  - name: Execute a command in the /app directory
+    ansible.builtin.command:
+      cmd: npm install
+      chdir: /app
 
 
 
