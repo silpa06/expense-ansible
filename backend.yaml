@@ -18,6 +18,11 @@
     loop:
     - nodejs
     - mysql
+
+  - name: install dependencies
+    ansible.builtin.pip:
+     name: PyMySQL
+     state: present
   
 
   - name: add application user expense 
