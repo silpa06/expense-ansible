@@ -23,10 +23,10 @@
     ansible.builtin.user:
      name: expense
 
-  - name: setup app directory
+  - name: create app directory
     ansible.builtin.file:
-    path: /app
-    state: directory
+     path: /app
+     state: directory
 
   # - name: downloading the application code
   #   ansible.builtin.get_url:
