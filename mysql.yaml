@@ -5,12 +5,17 @@
    Mysql_root_password: "ExpenseApp@1" 
    Mysql_login_host: "mysql.devteck.xyz"
   tasks:
+  - name: install mysql dependencies
+    ansible.builtin.package:
+     name: PyMySQL
+     state: present
+     
   - name: mysql server installation
     ansible.builtin.package:
      name: mysql-server
      state: present
 
-  - name: start ysql server
+  - name: start mysql server
     ansible.builtin.service:
      name: mysqld
      state: started
@@ -26,7 +31,7 @@
   - name: print mysql mysql_info
     ansible.builtin.debug:
      msg: "{{ mysql_info }}"
-     
+
 
 
 
