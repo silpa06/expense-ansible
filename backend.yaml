@@ -38,7 +38,7 @@
       dest: /app
       remote_src: yes
     
-  - name: Execute a command in the /app directory
+  - name: Execute a command in the app directory
     ansible.builtin.command:
       cmd: npm install
       chdir: /app
