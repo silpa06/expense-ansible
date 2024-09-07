@@ -21,8 +21,10 @@
 
   - name: install dependencies
     ansible.builtin.pip:
-     name: PyMySQL
-     state: present
+     name: 
+      - PyMySQL
+      - cryptography
+     executable: pip-3.9
   
 
   - name: add application user expense 
