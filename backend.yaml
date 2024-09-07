@@ -66,7 +66,7 @@
      login_host: "{{ mysql_host }}"
      state: import
      name: all
-     target: /app/schema/backend.sqlp.sql
+     target: /app/schema/backend.sql
 
   - name: restart the service 
     ansible.builtin.systemd_service:
