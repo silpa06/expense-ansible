@@ -1,6 +1,9 @@
 - name: backend configuration
   hosts: backend
   become: yes
+  vars:
+   mysql_root_password: "ExpenseApp@1"
+   mysql_host: "mysql.devteck.xyz"
   tasks:
   - name: disable the nodejs application
     ansible.builtin.command: dnf module disable nodejs -y
@@ -26,6 +29,7 @@
      path: /app
      state: directory
 
+
   - name: downloading the application code
     ansible.builtin.get_url:
      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip 
@@ -42,6 +46,28 @@
     ansible.builtin.command:
       cmd: npm install
       chdir: /app
+
+  - name: copy backend file to remote server
+    ansible.builtin.copy:
+     src: backend.service
+     dest: /etc/systemd/system/backend.service
+
+  - name: import mysql data to the database
+    mysql_db:
+     login_user: root
+     login_password: "{{ mysql_root_password }}"
+     login_host: "{{ mysql_host }}"
+     state: import
+     name: all
+     target: /app/schema/backend.sqlp.sql
+
+  - name: restart the service 
+    ansible.builtin.systemd_service:
+     state: restarted
+     daemon_reload: true
+     name: backend
+
+
 
 
 
